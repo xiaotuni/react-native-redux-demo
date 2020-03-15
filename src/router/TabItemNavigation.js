@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Abouter from '../pages/Abouter';
 import HomeStack from './HomeStack';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Demo1 from '../pages/Demo1';
 
 const TabItem = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ export default class TabItemNavigation extends React.Component {
           })}>
           <TabItem.Screen name="Home" component={HomeStack} />
           <TabItem.Screen name="About" component={Abouter} />
-          <TabItem.Screen name="About1" component={Abouter} />
+          <TabItem.Screen name="Demo1" component={Demo1} />
           <TabItem.Screen name="About2" component={Abouter} />
           <TabItem.Screen name="About3" component={Abouter} />
         </TabItem.Navigator>

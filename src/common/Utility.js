@@ -865,50 +865,50 @@ export default class Utility {
   }
 
   static async SeGlobalState(stateName, value) {
-    const dispatch = Utility.GetContent(Utility.ConstItem.KeyDispatch);
+    const dispatch = await Utility.GetContent(Utility.ConstItem.KeyDispatch);
     if (!dispatch) {
       return;
     }
-    const typeMap = Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
+    const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     return dispatch({ type: typeMap.UPDATE_CONTENT, stateName, value });
   }
 
   static async PushGlobalStateArray(stateName, value) {
-    const dispatch = Utility.GetContent(Utility.ConstItem.KeyDispatch);
+    const dispatch = await Utility.GetContent(Utility.ConstItem.KeyDispatch);
     if (!dispatch) {
       return;
     }
-    const typeMap = Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
+    const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     return dispatch({ type: typeMap.ARRAY_PUSH, stateName, value });
   }
 
   static async DeleteGlobalStateArray(stateName, value) {
-    const dispatch = Utility.GetContent(Utility.ConstItem.KeyDispatch);
+    const dispatch = await Utility.GetContent(Utility.ConstItem.KeyDispatch);
     if (!dispatch) {
       return;
     }
-    const typeMap = Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
+    const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     return dispatch({ type: typeMap.ARRAY_DELETE, stateName, value });
   }
 
   static Toast(msg, times) {
     return this.ToastAdd(msg, times);
   }
-  static ToastAdd(msg, times = 1500) {
-    const dispatch = Utility.GetContent(Utility.ConstItem.KeyDispatch);
+  static async ToastAdd(msg, times = 1500) {
+    const dispatch = await Utility.GetContent(Utility.ConstItem.KeyDispatch);
     if (!dispatch) {
       return;
     }
-    const typeMap = Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
+    const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     return dispatch({ type: typeMap.TOAST_ADD, value: { msg, times } });
   }
 
-  static ToastDelete(index) {
-    const dispatch = Utility.GetContent(Utility.ConstItem.KeyDispatch);
+  static async ToastDelete(index) {
+    const dispatch = await Utility.GetContent(Utility.ConstItem.KeyDispatch);
     if (!dispatch) {
       return;
     }
-    const typeMap = Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
+    const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     return dispatch({ type: typeMap.TOAST_DELETE, index });
   }
 
@@ -926,7 +926,6 @@ export default class Utility {
     if (!dispatch) {
       return;
     }
-    console.log('-------------http request-----------');
     const { params = {}, data = {}, headers } = args || {};
     const typeMap = await Utility.GetContent(Utility.ConstItem.KeyReduxTypeMap);
     const action = {
@@ -936,7 +935,6 @@ export default class Utility {
       stateName,
     };
 
-    console.log('-----action:', action);
     return dispatch({ ...action });
   }
 
