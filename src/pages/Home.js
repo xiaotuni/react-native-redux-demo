@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import { StyleSheet, Button, View, Text, BackHandler } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import Card from '../components/card';
 import { connect } from 'react-redux';
-import { ClassifyService } from '../services';
+import { ClassifyService, Utility } from '../services';
 
 @connect((state) => ({ Common: state.Common }))
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { lastBackPressed: false, current: true };
   }
 
   UNSAFE_componentWillMount() {
     this.Init();
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress.bind(this));
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress.bind(this));
+  }
+
+  async onBackPress() {
+    // const { dispatch } = this.props;
+    console.log(this.props);
+    console.log('-----------1--------');
+    const isExits = await Utility.Confirm({ Msg: '您真的要退出吗？' });
+    if (isExits) {
+      return false;
+    }
   }
 
   Init() {

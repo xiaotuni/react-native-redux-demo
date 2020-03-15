@@ -13,9 +13,7 @@ export default (props) => {
 
   const { navigation, route } = props;
   if (route.state) {
-    setTimeout(() => {
-      navigation.setOptions({ tabBarVisible: route.state.index > 0 ? false : true }) // Tab 隐藏
-    }, 300);
+    navigation.setOptions({ tabBarVisible: route.state.index > 0 ? false : true }); // Tab 隐藏
   }
 
   return (
